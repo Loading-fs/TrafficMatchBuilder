@@ -1,0 +1,9 @@
+TrafficMatch Builder v0.2 Beta - Clean Build
+
+- Complete clean rebuild of the v0.2 Beta C# project
+- Removed duplicate ClearScreen method
+- Keeps v0.2 Beta version number
+- Keeps multilingual UI texts
+- Keeps translated Help/Tutorial messages
+- Keeps improved TypeCode detection
+- Keeps all usable VMR rules visible in Scan Report

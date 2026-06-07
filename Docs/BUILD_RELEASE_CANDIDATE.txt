@@ -1,0 +1,28 @@
+TrafficMatch Builder v0.2 Beta - Release Candidate Build
+
+This build keeps the visible app version at v0.2 Beta but adds cleaner Windows metadata.
+
+Build commands:
+
+dotnet clean
+dotnet publish -c Release
+
+Final EXE:
+
+bin\Release\net8.0-windows\win-x64\publish\TrafficMatchBuilder.exe
+
+Recommended release test:
+1. Copy only TrafficMatchBuilder.exe to Desktop
+2. Start it from Desktop
+3. Scan AIG, FSLTL or IVAO MTL
+4. Export a VMR file
+5. Scan with Microsoft Defender
+6. Upload to VirusTotal
+
+Changes:
+- Added product metadata
+- Added company/author/copyright metadata
+- Added version metadata
+- Enabled PublishReadyToRun
+- Disabled single-file compression to reduce heuristic false positives
+- Removed DPI settings from app.manifest and kept DPI handling in code

@@ -1,0 +1,22 @@
+TrafficMatch Builder v0.2 Beta
+
+Major Update
+
+• Complete rewrite in C# / .NET 8
+• New standalone Windows executable
+• Improved traffic model scanning engine
+• Improved model matching generation logic
+• Integrated multi-language support
+• Built-in Help and Tutorial system
+• Enhanced scan reports and statistics
+• Improved user interface
+• Better compatibility with large traffic model libraries
+• Improved overall reliability
+• Reduced antivirus false-positive detections compared to early prototype builds
+
+Known Limitations
+
+• Early beta release
+• Additional traffic model detection improvements are planned
+• Merge functionality is planned for a future update
+• Additional export options are planned

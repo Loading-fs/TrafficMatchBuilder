@@ -1,0 +1,25 @@
+TrafficMatch Builder v0.2 Beta - Single File Build
+
+Open PowerShell in the project folder, where TrafficMatchBuilder.csproj is located.
+
+Build command:
+
+dotnet clean
+dotnet publish -c Release
+
+The final EXE should be here:
+
+bin\Release\net8.0-windows\win-x64\publish\TrafficMatchBuilder.exe
+
+Important:
+After publishing, copy only TrafficMatchBuilder.exe to your Desktop and test it.
+If it starts from the Desktop without additional files, the single-file build works.
+
+Recommended tests:
+1. Start the EXE
+2. Select language
+3. Select traffic model folder
+4. Scan models
+5. Export VMR
+6. Scan the EXE with Microsoft Defender
+7. Upload the EXE to VirusTotal

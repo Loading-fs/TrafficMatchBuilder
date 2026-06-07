@@ -1,0 +1,23 @@
+TrafficMatch Builder - Security Notice
+
+TrafficMatch Builder operates entirely offline.
+
+The application does not:
+
+• Connect to external servers
+• Download files
+• Upload files
+• Collect telemetry
+• Collect personal information
+• Modify simulator files
+• Modify Windows settings
+• Require administrator privileges
+• Install Windows services
+• Create startup entries
+• Run background processes after closing
+
+The application only reads aircraft configuration files from folders selected by the user and generates model matching configuration files based on the information found.
+
+TrafficMatch Builder is currently distributed as an unsigned Windows application. Because newly released software may have limited reputation data, some antivirus products may occasionally report heuristic or machine-learning based false positive detections.
+
+Users are encouraged to perform their own security checks if desired.

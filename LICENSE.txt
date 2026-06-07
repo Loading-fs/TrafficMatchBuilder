@@ -1,0 +1,19 @@
+TrafficMatch Builder License
+
+Copyright (c) 2026 Nils
+
+TrafficMatch Builder is provided free of charge.
+
+Permission is granted to use and distribute this software in its original, unmodified form.
+
+You may not:
+
+• Sell this software or any modified version of it
+• Redistribute modified versions while claiming them as the original project
+• Remove copyright notices or credits
+• Re-upload the project under a different name
+• Claim the project as your own work
+
+This software is provided "as is", without warranty of any kind.
+
+The author shall not be liable for any damages, issues or data loss resulting from the use of this software.
