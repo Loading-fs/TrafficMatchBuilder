@@ -23,6 +23,10 @@ Instead of manually editing XML files and creating model matching rules by hand,
 * Portable application
 * No installation required
 * No administrator privileges required
+* Community folder protection warning
+* Clickable project links
+* Built-in About window
+* Hidden Easter Egg
 
 ---
 
@@ -99,22 +103,28 @@ The application does not install aircraft, download content or modify simulator 
 7. Save the generated VMR file
 8. Import the generated file into vPilot
 
+### Important
+
+For best results, select a dedicated traffic model package such as FSLTL, AIG or another AI traffic library.
+
+Scanning the entire Community folder is supported but may increase scan times and produce less useful results.
+
 ---
 
 ## Version 0.2 Beta
 
 ### Highlights
 
-* Complete rewrite in C# / .NET 8
-* New standalone executable
-* Improved scanning engine
-* Improved VMR generation
-* Multi-language support
-* Built-in Help system
-* Enhanced scan reports
-* Improved user interface
-* Reduced antivirus false positives
-* Numerous internal optimizations
+* Improved About window
+* Clickable GitHub project link
+* Clickable Flightsim.to project link
+* Community folder scan warning
+* Hidden Easter Egg
+* Improved localization support
+* Updated documentation
+* Additional UI improvements
+* Improved stability and usability
+* 0/68 VirusTotal detections at release time
 
 ---
 

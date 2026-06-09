@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -12,7 +13,7 @@ namespace TrafficMatchBuilder;
 
 public sealed class MainForm : Form
 {
-    private const string AppVersion = "v0.2 Beta";
+    private const string AppVersion = "v0.3 Beta";
 
     private readonly Color Bg = Color.FromArgb(11, 18, 32);
     private readonly Color Bg2 = Color.FromArgb(15, 23, 42);
@@ -41,6 +42,7 @@ public sealed class MainForm : Form
     private Button? _exportButton;
 
     private readonly List<Label> _statNumbers = new();
+    private int _aboutLogoClickCount = 0;
 
     public MainForm()
     {
@@ -52,6 +54,15 @@ public sealed class MainForm : Form
         ForeColor = TextMain;
         Font = new Font("Segoe UI", 9F);
         DoubleBuffered = true;
+
+        try
+        {
+            Icon = new Icon("icon.ico");
+        }
+        catch
+        {
+            // The EXE icon is embedded via the project file.
+        }
 
         ShowLanguageScreen();
     }
@@ -111,7 +122,19 @@ public sealed class MainForm : Form
             ["export_complete"] = "Export complete",
             ["export_failed"] = "Export failed",
             ["credits_text"] = $"TrafficMatch Builder {AppVersion}\n\nCreated by Nils.\nBuilt by simmers, for simmers.",
-            ["help_title"] = "Quick Tutorial"
+            ["help_title"] = "Quick Tutorial",
+            ["about_subtitle"] = "Automatic VMR Generator for Microsoft Flight Simulator",
+            ["developer"] = "Developer",
+            ["project_links"] = "Project Links",
+            ["open_flightsim"] = "Open Flightsim.to",
+            ["open_github"] = "Open GitHub",
+            ["about_credits_title"] = "Credits",
+            ["about_credits_text"] = "Thanks to all beta testers, the VATSIM community and everyone providing feedback and bug reports.",
+            ["about_disclaimer"] = "Not affiliated with Microsoft, Asobo Studio, VATSIM or vPilot.",
+            ["close"] = "Close",
+            ["community_warning_title"] = "Community Folder Warning",
+            ["community_warning_text"] = "You selected what appears to be the full Microsoft Flight Simulator Community folder.\n\nFor best results, please select a specific traffic model package instead, such as FSLTL, AIG or another installed AI traffic library.\n\nScanning the full Community folder can take longer and may include unrelated addons, aircraft or configuration files. This can lead to confusing scan results or less useful VMR output.\n\nTraffic model packages do not always have to be located directly inside the Community folder, but Microsoft Flight Simulator must be able to access them for the models to appear in the simulator.\n\nDo you want to continue scanning the full Community folder anyway?",
+            ["scan_tip"] = "Tip: If the scan result looks incorrect, try selecting the specific traffic model package instead of the full Community folder."
         };
 
         var de = new Dictionary<string, string>
@@ -159,7 +182,19 @@ public sealed class MainForm : Form
             ["export_complete"] = "Export abgeschlossen",
             ["export_failed"] = "Export fehlgeschlagen",
             ["credits_text"] = $"TrafficMatch Builder {AppVersion}\n\nErstellt von Nils.\nGebaut von Simmern, für Simmer.",
-            ["help_title"] = "Kurzes Tutorial"
+            ["help_title"] = "Kurzes Tutorial",
+            ["about_subtitle"] = "Automatischer VMR-Generator für Microsoft Flight Simulator",
+            ["developer"] = "Entwickler",
+            ["project_links"] = "Projektlinks",
+            ["open_flightsim"] = "Flightsim.to öffnen",
+            ["open_github"] = "GitHub öffnen",
+            ["about_credits_title"] = "Credits",
+            ["about_credits_text"] = "Danke an alle Beta-Tester, die VATSIM-Community und alle, die Feedback und Fehlermeldungen liefern.",
+            ["about_disclaimer"] = "Nicht verbunden mit Microsoft, Asobo Studio, VATSIM oder vPilot.",
+            ["close"] = "Schließen",
+            ["community_warning_title"] = "Community-Ordner-Warnung",
+            ["community_warning_text"] = "Du hast offenbar den kompletten Microsoft Flight Simulator Community-Ordner ausgewählt.\n\nFür die besten Ergebnisse solltest du ein bestimmtes Traffic-Modellpaket auswählen, zum Beispiel FSLTL, AIG oder eine andere installierte AI-Traffic-Bibliothek.\n\nDas Scannen des kompletten Community-Ordners kann länger dauern und auch fremde Addons, Flugzeuge oder Konfigurationsdateien einschließen. Dadurch können unübersichtliche Scan-Ergebnisse oder weniger sinnvolle VMR-Dateien entstehen.\n\nTraffic-Modellpakete müssen nicht zwingend direkt im Community-Ordner liegen, aber Microsoft Flight Simulator muss auf sie zugreifen können, damit die Modelle im Simulator angezeigt werden.\n\nMöchtest du den kompletten Community-Ordner trotzdem scannen?",
+            ["scan_tip"] = "Tipp: Wenn das Scan-Ergebnis merkwürdig aussieht, wähle statt des kompletten Community-Ordners besser das konkrete Traffic-Modellpaket aus."
         };
 
         var no = new Dictionary<string, string>
@@ -207,7 +242,19 @@ public sealed class MainForm : Form
             ["export_complete"] = "Eksport fullført",
             ["export_failed"] = "Eksport mislyktes",
             ["credits_text"] = $"TrafficMatch Builder {AppVersion}\n\nLaget av Nils.\nBygget av simmere, for simmere.",
-            ["help_title"] = "Kort veiledning"
+            ["help_title"] = "Kort veiledning",
+            ["about_subtitle"] = "Automatisk VMR-generator for Microsoft Flight Simulator",
+            ["developer"] = "Utvikler",
+            ["project_links"] = "Prosjektlenker",
+            ["open_flightsim"] = "Åpne Flightsim.to",
+            ["open_github"] = "Åpne GitHub",
+            ["about_credits_title"] = "Credits",
+            ["about_credits_text"] = "Takk til alle beta-testere, VATSIM-miljøet og alle som gir tilbakemeldinger og feilrapporter.",
+            ["about_disclaimer"] = "Ikke tilknyttet Microsoft, Asobo Studio, VATSIM eller vPilot.",
+            ["close"] = "Lukk",
+            ["community_warning_title"] = "Advarsel om Community-mappen",
+            ["community_warning_text"] = "Du har tilsynelatende valgt hele Microsoft Flight Simulator Community-mappen.\n\nFor best resultat bør du velge en spesifikk trafikkmodellpakke, for eksempel FSLTL, AIG eller et annet installert AI-trafikkbibliotek.\n\nSkanning av hele Community-mappen kan ta lengre tid og kan inkludere urelaterte tillegg, fly eller konfigurasjonsfiler. Dette kan gi forvirrende skannresultater eller mindre nyttige VMR-filer.\n\nTrafikkmodellpakker må ikke nødvendigvis ligge direkte i Community-mappen, men Microsoft Flight Simulator må ha tilgang til dem for at modellene skal vises i simulatoren.\n\nVil du fortsette å skanne hele Community-mappen likevel?",
+            ["scan_tip"] = "Tips: Hvis skannresultatet ser feil ut, prøv å velge den spesifikke trafikkmodellpakken i stedet for hele Community-mappen."
         };
 
         var fr = new Dictionary<string, string>
@@ -255,7 +302,19 @@ public sealed class MainForm : Form
             ["export_complete"] = "Export terminé",
             ["export_failed"] = "Échec de l'export",
             ["credits_text"] = $"TrafficMatch Builder {AppVersion}\n\nCréé par Nils.\nCréé par des simmers, pour des simmers.",
-            ["help_title"] = "Tutoriel rapide"
+            ["help_title"] = "Tutoriel rapide",
+            ["about_subtitle"] = "Générateur VMR automatique pour Microsoft Flight Simulator",
+            ["developer"] = "Développeur",
+            ["project_links"] = "Liens du projet",
+            ["open_flightsim"] = "Ouvrir Flightsim.to",
+            ["open_github"] = "Ouvrir GitHub",
+            ["about_credits_title"] = "Credits",
+            ["about_credits_text"] = "Merci à tous les bêta-testeurs, à la communauté VATSIM et à toutes les personnes qui envoient des retours et des rapports de bugs.",
+            ["about_disclaimer"] = "Non affilié à Microsoft, Asobo Studio, VATSIM ou vPilot.",
+            ["close"] = "Fermer",
+            ["community_warning_title"] = "Avertissement dossier Community",
+            ["community_warning_text"] = "Vous semblez avoir sélectionné le dossier Community complet de Microsoft Flight Simulator.\n\nPour de meilleurs résultats, sélectionnez plutôt un package de modèles de trafic spécifique, par exemple FSLTL, AIG ou une autre bibliothèque de trafic AI installée.\n\nScanner tout le dossier Community peut prendre plus de temps et inclure des addons, avions ou fichiers de configuration sans rapport. Cela peut produire des résultats confus ou un fichier VMR moins utile.\n\nLes packages de modèles de trafic ne doivent pas forcément se trouver directement dans le dossier Community, mais Microsoft Flight Simulator doit pouvoir y accéder pour que les modèles apparaissent dans le simulateur.\n\nVoulez-vous tout de même continuer à scanner le dossier Community complet ?",
+            ["scan_tip"] = "Astuce : si le résultat du scan semble incorrect, essayez de sélectionner le package de modèles de trafic spécifique au lieu du dossier Community complet."
         };
 
         var es = new Dictionary<string, string>
@@ -303,7 +362,19 @@ public sealed class MainForm : Form
             ["export_complete"] = "Exportación completa",
             ["export_failed"] = "Exportación fallida",
             ["credits_text"] = $"TrafficMatch Builder {AppVersion}\n\nCreado por Nils.\nCreado por simmers, para simmers.",
-            ["help_title"] = "Tutorial rápido"
+            ["help_title"] = "Tutorial rápido",
+            ["about_subtitle"] = "Generador VMR automático para Microsoft Flight Simulator",
+            ["developer"] = "Desarrollador",
+            ["project_links"] = "Enlaces del proyecto",
+            ["open_flightsim"] = "Abrir Flightsim.to",
+            ["open_github"] = "Abrir GitHub",
+            ["about_credits_title"] = "Créditos",
+            ["about_credits_text"] = "Gracias a todos los beta testers, a la comunidad de VATSIM y a todos los que envían comentarios e informes de errores.",
+            ["about_disclaimer"] = "No está afiliado a Microsoft, Asobo Studio, VATSIM ni vPilot.",
+            ["close"] = "Cerrar",
+            ["community_warning_title"] = "Advertencia sobre la carpeta Community",
+            ["community_warning_text"] = "Parece que has seleccionado toda la carpeta Community de Microsoft Flight Simulator.\n\nPara obtener mejores resultados, selecciona un paquete específico de modelos de tráfico, como FSLTL, AIG u otra biblioteca de tráfico AI instalada.\n\nEscanear toda la carpeta Community puede tardar más e incluir addons, aviones o archivos de configuración no relacionados. Esto puede generar resultados confusos o un archivo VMR menos útil.\n\nLos paquetes de modelos de tráfico no tienen que estar necesariamente dentro de la carpeta Community, pero Microsoft Flight Simulator debe poder acceder a ellos para que los modelos aparezcan en el simulador.\n\n¿Quieres continuar escaneando toda la carpeta Community de todos modos?",
+            ["scan_tip"] = "Consejo: si el resultado del escaneo parece incorrecto, prueba a seleccionar el paquete específico de modelos de tráfico en lugar de toda la carpeta Community."
         };
 
         var it = new Dictionary<string, string>
@@ -351,7 +422,19 @@ public sealed class MainForm : Form
             ["export_complete"] = "Esportazione completata",
             ["export_failed"] = "Esportazione fallita",
             ["credits_text"] = $"TrafficMatch Builder {AppVersion}\n\nCreato da Nils.\nCreato da simmers, per simmers.",
-            ["help_title"] = "Tutorial rapido"
+            ["help_title"] = "Tutorial rapido",
+            ["about_subtitle"] = "Generatore VMR automatico per Microsoft Flight Simulator",
+            ["developer"] = "Sviluppatore",
+            ["project_links"] = "Link del progetto",
+            ["open_flightsim"] = "Apri Flightsim.to",
+            ["open_github"] = "Apri GitHub",
+            ["about_credits_title"] = "Credits",
+            ["about_credits_text"] = "Grazie a tutti i beta tester, alla community VATSIM e a chi fornisce feedback e segnalazioni di bug.",
+            ["about_disclaimer"] = "Non affiliato con Microsoft, Asobo Studio, VATSIM o vPilot.",
+            ["close"] = "Chiudi",
+            ["community_warning_title"] = "Avviso cartella Community",
+            ["community_warning_text"] = "Sembra che tu abbia selezionato l'intera cartella Community di Microsoft Flight Simulator.\n\nPer risultati migliori, seleziona un pacchetto specifico di modelli traffico, ad esempio FSLTL, AIG o un'altra libreria di traffico AI installata.\n\nLa scansione dell'intera cartella Community può richiedere più tempo e includere addon, aerei o file di configurazione non pertinenti. Questo può produrre risultati confusi o un file VMR meno utile.\n\nI pacchetti di modelli traffico non devono necessariamente trovarsi direttamente nella cartella Community, ma Microsoft Flight Simulator deve potervi accedere affinché i modelli vengano visualizzati nel simulatore.\n\nVuoi continuare comunque con la scansione dell'intera cartella Community?",
+            ["scan_tip"] = "Suggerimento: se il risultato della scansione sembra errato, prova a selezionare il pacchetto specifico di modelli traffico invece dell'intera cartella Community."
         };
 
         var dict = lang switch
@@ -390,6 +473,20 @@ public sealed class MainForm : Form
                 "6. Speichere die VMR-Datei an einem Ort deiner Wahl.",
                 "7. Füge die VMR-Datei in vPilot unter Model Matching hinzu.",
                 "",
+                "",
+                "Which folder should I scan?",
+                "",
+                "Recommended:",
+                "- FSLTL traffic base folder",
+                "- AIG traffic package folder",
+                "- Custom AI traffic model folder",
+                "",
+                "Not recommended:",
+                "- The full Community folder",
+                "- The entire MSFS Packages folder",
+                "- Random addon folders that do not contain traffic models",
+                "",
+                "Traffic packages do not necessarily have to be located inside the Community folder, but Microsoft Flight Simulator must be able to access them for the models to appear.",
                 "Das Programm verändert keine Simulator-Dateien und arbeitet lokal auf deinem PC."),
 
             "no" => string.Join(nl,
@@ -405,6 +502,20 @@ public sealed class MainForm : Form
                 "6. Lagre VMR-filen hvor du ønsker.",
                 "7. Legg VMR-filen til i vPilot under Model Matching.",
                 "",
+                "",
+                "Which folder should I scan?",
+                "",
+                "Recommended:",
+                "- FSLTL traffic base folder",
+                "- AIG traffic package folder",
+                "- Custom AI traffic model folder",
+                "",
+                "Not recommended:",
+                "- The full Community folder",
+                "- The entire MSFS Packages folder",
+                "- Random addon folders that do not contain traffic models",
+                "",
+                "Traffic packages do not necessarily have to be located inside the Community folder, but Microsoft Flight Simulator must be able to access them for the models to appear.",
                 "Programmet endrer ingen simulatorfiler og fungerer lokalt på PC-en din."),
 
             "fr" => string.Join(nl,
@@ -420,6 +531,20 @@ public sealed class MainForm : Form
                 "6. Enregistrez le fichier VMR à l'emplacement souhaité.",
                 "7. Ajoutez le fichier VMR dans vPilot sous Model Matching.",
                 "",
+                "",
+                "Which folder should I scan?",
+                "",
+                "Recommended:",
+                "- FSLTL traffic base folder",
+                "- AIG traffic package folder",
+                "- Custom AI traffic model folder",
+                "",
+                "Not recommended:",
+                "- The full Community folder",
+                "- The entire MSFS Packages folder",
+                "- Random addon folders that do not contain traffic models",
+                "",
+                "Traffic packages do not necessarily have to be located inside the Community folder, but Microsoft Flight Simulator must be able to access them for the models to appear.",
                 "Le programme ne modifie aucun fichier du simulateur et fonctionne localement."),
 
             "es" => string.Join(nl,
@@ -435,6 +560,20 @@ public sealed class MainForm : Form
                 "6. Guarda el archivo VMR donde prefieras.",
                 "7. Añade el archivo VMR en vPilot en Model Matching.",
                 "",
+                "",
+                "Which folder should I scan?",
+                "",
+                "Recommended:",
+                "- FSLTL traffic base folder",
+                "- AIG traffic package folder",
+                "- Custom AI traffic model folder",
+                "",
+                "Not recommended:",
+                "- The full Community folder",
+                "- The entire MSFS Packages folder",
+                "- Random addon folders that do not contain traffic models",
+                "",
+                "Traffic packages do not necessarily have to be located inside the Community folder, but Microsoft Flight Simulator must be able to access them for the models to appear.",
                 "El programa no modifica archivos del simulador y funciona localmente."),
 
             "it" => string.Join(nl,
@@ -450,6 +589,20 @@ public sealed class MainForm : Form
                 "6. Salva il file VMR dove preferisci.",
                 "7. Aggiungi il file VMR in vPilot nella sezione Model Matching.",
                 "",
+                "",
+                "Which folder should I scan?",
+                "",
+                "Recommended:",
+                "- FSLTL traffic base folder",
+                "- AIG traffic package folder",
+                "- Custom AI traffic model folder",
+                "",
+                "Not recommended:",
+                "- The full Community folder",
+                "- The entire MSFS Packages folder",
+                "- Random addon folders that do not contain traffic models",
+                "",
+                "Traffic packages do not necessarily have to be located inside the Community folder, but Microsoft Flight Simulator must be able to access them for the models to appear.",
                 "Il programma non modifica file del simulatore e funziona localmente."),
 
             _ => string.Join(nl,
@@ -465,6 +618,20 @@ public sealed class MainForm : Form
                 "6. Save the VMR file to a location of your choice.",
                 "7. Add the VMR file to vPilot under Model Matching.",
                 "",
+                "",
+                "Which folder should I scan?",
+                "",
+                "Recommended:",
+                "- FSLTL traffic base folder",
+                "- AIG traffic package folder",
+                "- Custom AI traffic model folder",
+                "",
+                "Not recommended:",
+                "- The full Community folder",
+                "- The entire MSFS Packages folder",
+                "- Random addon folders that do not contain traffic models",
+                "",
+                "Traffic packages do not necessarily have to be located inside the Community folder, but Microsoft Flight Simulator must be able to access them for the models to appear.",
                 "The application does not modify simulator files and works locally on your computer.")
         };
     }
@@ -632,11 +799,7 @@ public sealed class MainForm : Form
         wrapper.Controls.Add(report);
 
         var credits = CreateHeaderButton(L("credits"), 905, 18);
-        credits.Click += (_, _) => MessageBox.Show(
-            L("credits_text"),
-            L("credits"),
-            MessageBoxButtons.OK,
-            MessageBoxIcon.Information);
+        credits.Click += (_, _) => ShowAboutWindow();
         wrapper.Controls.Add(credits);
 
         var help = CreateHeaderButton(L("help"), 1000, 18);
@@ -960,6 +1123,9 @@ public sealed class MainForm : Form
         if (string.IsNullOrWhiteSpace(_selectedFolder))
             return;
 
+        if (!ConfirmCommunityFolderScan())
+            return;
+
         try
         {
             _statusLabel!.Text = L("scanning");
@@ -1001,6 +1167,8 @@ public sealed class MainForm : Form
             $"{L("found_cfg")} {_scanResult.AircraftCfgFiles}",
             $"{L("found_models")} {_scanResult.ModelsFound}",
             $"{L("usable_rules")} {_scanResult.UsableRules}",
+            "",
+            L("scan_tip"),
             "",
             L("vmr_rules")
         };
@@ -1044,6 +1212,214 @@ public sealed class MainForm : Form
         }
     }
 
+
+    private bool ConfirmCommunityFolderScan()
+    {
+        var folderName = Path.GetFileName(_selectedFolder.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar));
+
+        if (!string.Equals(folderName, "Community", StringComparison.OrdinalIgnoreCase))
+            return true;
+
+        var result = MessageBox.Show(
+            L("community_warning_text"),
+            L("community_warning_title"),
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Warning);
+
+        return result == DialogResult.Yes;
+    }
+
+    private void ShowAboutWindow()
+    {
+        _aboutLogoClickCount = 0;
+
+        using var about = new Form
+        {
+            Text = "About TrafficMatch Builder",
+            StartPosition = FormStartPosition.CenterParent,
+            Size = new Size(620, 520),
+            MinimumSize = new Size(560, 480),
+            BackColor = Bg,
+            ForeColor = TextMain,
+            Font = new Font("Segoe UI", 9F),
+            FormBorderStyle = FormBorderStyle.FixedDialog,
+            MaximizeBox = false,
+            MinimizeBox = false
+        };
+
+        var title = new Label
+        {
+            Text = $"TrafficMatch Builder {AppVersion}",
+            Font = new Font("Segoe UI", 22, FontStyle.Bold),
+            ForeColor = TextMain,
+            BackColor = Bg,
+            AutoSize = false,
+            TextAlign = ContentAlignment.MiddleCenter,
+            Dock = DockStyle.Top,
+            Height = 64
+        };
+
+        var logo = new Label
+        {
+            Text = "✈  ⚙  </>",
+            Font = new Font("Segoe UI", 25, FontStyle.Bold),
+            ForeColor = BlueLight,
+            BackColor = PanelDark,
+            AutoSize = false,
+            TextAlign = ContentAlignment.MiddleCenter,
+            Dock = DockStyle.Top,
+            Height = 76,
+            Cursor = Cursors.Hand
+        };
+
+        logo.Click += (_, _) =>
+        {
+            _aboutLogoClickCount++;
+
+            if (_aboutLogoClickCount == 10)
+            {
+                MessageBox.Show(
+                    "Achievement Unlocked\r\n\r\n" +
+                    "Certified Traffic Matching Engineer\r\n\r\n" +
+                    "You survived:\r\n\r\n" +
+                    "• XML files\r\n" +
+                    "• model matching\r\n" +
+                    "• VMR generation\r\n" +
+                    "• VirusTotal false positives\r\n\r\n" +
+                    "Welcome to the maintenance department.\r\n\r\n" +
+                    "Coffee is mandatory.",
+                    "Achievement Unlocked",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
+        };
+
+        var body = new Panel
+        {
+            Dock = DockStyle.Fill,
+            BackColor = Bg,
+            Padding = new Padding(28, 22, 28, 18)
+        };
+
+        body.Controls.Add(new Label
+        {
+            Text = L("about_subtitle"),
+            Font = new Font("Segoe UI", 10, FontStyle.Regular),
+            ForeColor = TextMuted,
+            BackColor = Bg,
+            AutoSize = false,
+            Size = new Size(540, 26),
+            Location = new Point(28, 18)
+        });
+
+        body.Controls.Add(new Label
+        {
+            Text = L("developer"),
+            Font = new Font("Segoe UI", 10, FontStyle.Bold),
+            ForeColor = TextMain,
+            BackColor = Bg,
+            AutoSize = true,
+            Location = new Point(28, 58)
+        });
+
+        body.Controls.Add(new Label
+        {
+            Text = "Nils",
+            Font = new Font("Segoe UI", 10),
+            ForeColor = TextMuted,
+            BackColor = Bg,
+            AutoSize = true,
+            Location = new Point(28, 84)
+        });
+
+        body.Controls.Add(new Label
+        {
+            Text = L("project_links"),
+            Font = new Font("Segoe UI", 10, FontStyle.Bold),
+            ForeColor = TextMain,
+            BackColor = Bg,
+            AutoSize = true,
+            Location = new Point(28, 124)
+        });
+
+        var flightsimButton = CreateModernButton(L("open_flightsim"), Blue, new Size(180, 42));
+        flightsimButton.Location = new Point(28, 154);
+        flightsimButton.Click += (_, _) => OpenExternalLink("https://flightsim.to/addon/109917/trafficmatch-builder-msfs-traffic-library-vmr-generator");
+        body.Controls.Add(flightsimButton);
+
+        var githubButton = CreateModernButton(L("open_github"), Color.FromArgb(31, 41, 55), new Size(180, 42));
+        githubButton.Location = new Point(222, 154);
+        githubButton.Click += (_, _) => OpenExternalLink("https://github.com/Loading-fs/TrafficMatchBuilder");
+        body.Controls.Add(githubButton);
+
+        body.Controls.Add(new Label
+        {
+            Text = L("about_credits_title"),
+            Font = new Font("Segoe UI", 10, FontStyle.Bold),
+            ForeColor = TextMain,
+            BackColor = Bg,
+            AutoSize = true,
+            Location = new Point(28, 220)
+        });
+
+        body.Controls.Add(new Label
+        {
+            Text = L("about_credits_text"),
+            Font = new Font("Segoe UI", 10),
+            ForeColor = TextMuted,
+            BackColor = Bg,
+            AutoSize = false,
+            Size = new Size(540, 48),
+            Location = new Point(28, 246)
+        });
+
+        body.Controls.Add(new Label
+        {
+            Text = $"{L("about_disclaimer")}\r\n© 2026 TrafficMatch Builder",
+            Font = new Font("Segoe UI", 9),
+            ForeColor = TextSoft,
+            BackColor = Bg,
+            AutoSize = false,
+            Size = new Size(540, 44),
+            Location = new Point(28, 316)
+        });
+
+        var close = CreateModernButton(L("close"), Blue, new Size(120, 42));
+        close.Dock = DockStyle.Bottom;
+        close.Click += (_, _) => about.Close();
+
+        about.Controls.Add(body);
+        about.Controls.Add(close);
+        about.Controls.Add(logo);
+        about.Controls.Add(title);
+
+        about.ShowDialog(this);
+    }
+
+    private static void OpenExternalLink(string url)
+    {
+        try
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = url,
+                UseShellExecute = true
+            });
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(
+                ex.Message,
+                "Could not open link",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error);
+        }
+    }
+
+
+
+
+
     private void ShowReportMenu()
     {
         var menu = new ContextMenuStrip();
@@ -1086,9 +1462,6 @@ public sealed class MainForm : Form
 
         if (lowerPath.Contains("aig"))
             return "AIG";
-
-        if (lowerPath.Contains("ivao") || lowerPath.Contains("mtl"))
-            return "MTL";
 
         return "-";
     }
@@ -1183,7 +1556,7 @@ public sealed class HeaderBanner : Panel
 
         e.Graphics.DrawString("TrafficMatch", titleFont, whiteBrush, 200, 42);
         e.Graphics.DrawString("Builder", titleFont, blueBrush, 510, 42);
-        e.Graphics.DrawString("VMR Generator for vPilot & VATSIM  •  v0.2 Beta", subtitleFont, mutedBrush, 205, 105);
+        e.Graphics.DrawString("VMR Generator for vPilot & VATSIM  •  v0.3 Beta", subtitleFont, mutedBrush, 205, 105);
         e.Graphics.DrawString("Scan  •  Match  •  Export", subtitleFont, blueBrush, 205, 132);
     }
 }

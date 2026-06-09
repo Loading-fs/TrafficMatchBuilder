@@ -21,24 +21,31 @@
     <AssemblyName>TrafficMatchBuilder</AssemblyName>
     <RootNamespace>TrafficMatchBuilder</RootNamespace>
 
-    <Version>0.2.0</Version>
-    <AssemblyVersion>0.2.0.0</AssemblyVersion>
-    <FileVersion>0.2.0.0</FileVersion>
-    <InformationalVersion>0.2 Beta</InformationalVersion>
+    <Version>0.3.0</Version>
+    <AssemblyVersion>0.3.0.0</AssemblyVersion>
+    <FileVersion>0.3.0.0</FileVersion>
+    <InformationalVersion>0.3 Beta</InformationalVersion>
 
     <Company>TrafficMatch Builder</Company>
     <Authors>Nils</Authors>
     <Product>TrafficMatch Builder</Product>
     <Title>TrafficMatch Builder</Title>
-    <Description>Traffic Model Matching Utility for Microsoft Flight Simulator</Description>
+    <Description>Automatic VMR Generator for vPilot and Microsoft Flight Simulator</Description>
     <Copyright>Copyright © 2026 Nils</Copyright>
 
     <NeutralLanguage>en</NeutralLanguage>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <Content Include="Assets\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="icon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
