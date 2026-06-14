@@ -1,22 +1,21 @@
-TrafficMatch Builder v0.2 Beta
+TrafficMatch Builder v0.6 Beta
+Visual Overhaul & Stability Update
 
-Major Update
+New in v0.6 Beta:
 
-• Complete rewrite in C# / .NET 8
-• New standalone Windows executable
-• Improved traffic model scanning engine
-• Improved model matching generation logic
-• Integrated multi-language support
-• Built-in Help and Tutorial system
-• Enhanced scan reports and statistics
-• Improved user interface
-• Better compatibility with large traffic model libraries
-• Improved overall reliability
-• Reduced antivirus false-positive detections compared to early prototype builds
-
-Known Limitations
-
-• Early beta release
-• Additional traffic model detection improvements are planned
-• Merge functionality is planned for a future update
-• Additional export options are planned
+- Updated versioning and generated VMR metadata to v0.6 Beta.
+- Refined the language screen layout and removed unnecessary supported-pack badges.
+- Improved the main scan report structure for better readability.
+- Added clearer scan summary, path/discovery and source overview sections.
+- Localized source overview text for English, German, Norwegian, French, Spanish and Italian.
+- Reworked the Help window into a scrollable dialog instead of a large message box.
+- Improved the Supported Packs window layout and scrolling behavior.
+- Improved the About/Credits window layout and scrolling behavior.
+- Fixed a duplicated Dock assignment in the About window code.
+- Improved several UI sizes, spacing and text areas to avoid clipped text.
+- Improved Community folder guidance and scan warnings.
+- Improved wording around traffic libraries vs. addon liveries.
+- Improved Fenix and PMDG package guidance in the UI text.
+- Improved robustness around missing branding assets.
+- Updated README and release documentation for the v0.6 Beta workflow.
+- General cleanup, polish and stability improvements.

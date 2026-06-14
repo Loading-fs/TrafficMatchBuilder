@@ -2,31 +2,38 @@
 
 ![TrafficMatch Builder](Screenshots/banner.png)
 
-**Automatic Model Matching Generator for Microsoft Flight Simulator**
+**Automatic Model Matching Generator for Microsoft Flight Simulator, vPilot and VATSIM**
 
-TrafficMatch Builder is a lightweight utility that automatically scans installed traffic model libraries and generates ready-to-use VMR (Virtual Model Rule) files for vPilot and VATSIM.
+TrafficMatch Builder is a lightweight utility that automatically scans installed traffic model libraries, supported addon liveries and Microsoft Flight Simulator Community packages to generate ready-to-use VMR (Virtual Model Rule) files for vPilot and VATSIM.
 
-Instead of manually editing XML files and creating model matching rules by hand, TrafficMatch Builder analyzes your installed traffic models and generates matching configurations within seconds.
+Instead of manually editing XML files and creating model matching rules by hand, TrafficMatch Builder analyzes available aircraft configuration data and generates matching configurations within seconds.
 
 ---
 
 ## Features
 
-* Automatic traffic model scanning
+* Automatic traffic library scanning
+* Automatic addon livery scanning
+* Automatic Microsoft Flight Simulator package discovery
 * Automatic VMR generation
-* Support for large traffic model libraries
+* Fenix A320 Family support
+* PMDG 737 Family support
+* PMDG 777 Family support
+* Automatic base aircraft resolution
+* Confidence-based model validation
 * Multi-language user interface
 * Built-in Help and Tutorial system
-* Detailed scan reports and statistics
+* Detailed scan reports
+* Supported Packs information window
+* Guided Community Folder workflow
 * Modern dark mode interface
 * Offline operation
 * Portable application
 * No installation required
 * No administrator privileges required
 * Community folder protection warning
-* Clickable project links
-* Built-in About window
-* Hidden Easter Egg
+* Built-in About and Credits windows
+* Application branding and custom icon
 
 ---
 
@@ -44,9 +51,9 @@ Choose your preferred language when launching the application.
 
 ![Main Window](Screenshots/main-window.png)
 
-Simple three-step workflow:
+Guided workflow:
 
-**Select Folder → Scan Models → Export VMR**
+**Select Community Folder → Select Scan Source → Scan Models → Export VMR**
 
 The application guides users through the complete process with a clean and beginner-friendly interface.
 
@@ -56,13 +63,22 @@ The application guides users through the complete process with a clean and begin
 
 ![Scan Complete](Screenshots/scan-complete.png)
 
-TrafficMatch Builder automatically detects installed aircraft models and generates ready-to-use VMR rules for export.
+TrafficMatch Builder automatically detects installed aircraft models, resolves supported addon packages and generates ready-to-use VMR rules for export.
 
 ---
 
 ## What is a VMR File?
 
 A VMR (Virtual Model Rule) file tells vPilot which aircraft model should be displayed when another pilot connects to the VATSIM network.
+
+When flying online, vPilot receives information such as:
+
+* Aircraft type
+* Airline code
+* Callsign
+* Livery information
+
+It then attempts to match this information with aircraft models installed on your computer.
 
 Without proper model matching you may encounter:
 
@@ -71,13 +87,13 @@ Without proper model matching you may encounter:
 * Generic substitute aircraft
 * Reduced realism during online flying
 
-TrafficMatch Builder helps automate the creation of these matching rules based on the traffic models already installed on your system.
+TrafficMatch Builder helps automate the creation of these matching rules based on the traffic models and supported addon liveries already installed on your system.
 
 ---
 
 ## How It Works
 
-TrafficMatch Builder scans the selected traffic model folder and searches for aircraft configuration files.
+TrafficMatch Builder scans the selected folder and searches for aircraft configuration files used by traffic model packages and supported addon liveries.
 
 The application automatically reads information such as:
 
@@ -85,46 +101,129 @@ The application automatically reads information such as:
 * Aircraft type codes
 * Airline codes
 * Available model variations
+* Livery metadata
+* Supported package information
 
 Using this information, TrafficMatch Builder generates VMR rules and exports them into a ready-to-use VMR file.
 
 The application does not install aircraft, download content or modify simulator files.
+
+It only reads aircraft configuration data and generates model matching rules based on the information found.
+
+---
+
+## Traffic Library Scan vs Addon Livery Scan
+
+TrafficMatch Builder supports two different scanning methods.
+
+### Traffic Library Scan Recommended
+
+Designed for:
+
+* FSLTL
+* AIG
+* Other AI traffic model libraries
+* Custom traffic model collections
+
+Advantages:
+
+* Best performance
+* Lowest simulator resource usage
+* Recommended for most users
+* Large airline coverage
+
+### Addon Livery Scan
+
+Supported addons:
+
+* Fenix A320 Family
+* PMDG 737 Family
+* PMDG 777 Family
+
+Addon aircraft are full-fidelity aircraft and may consume significantly more simulator resources than dedicated traffic models.
+
+For best results, addon liveries should only be used when the desired livery is not already available within a traffic library such as FSLTL or AIG.
+
+Other addon aircraft may work but are currently unsupported and untested.
 
 ---
 
 ## Quick Start
 
 1. Launch TrafficMatch Builder
-2. Select your language
-3. Choose your traffic model folder
-4. Click **Scan Models**
-5. Review the detected models
-6. Click **Export VMR**
-7. Save the generated VMR file
-8. Import the generated file into vPilot
+2. Select your preferred language
+3. Select your Microsoft Flight Simulator Community folder
+4. Select a traffic library or supported addon livery
+5. Click **Scan Models**
+6. Review the scan report
+7. Click **Export VMR**
+8. Save the generated VMR file
+9. Import the generated file into vPilot
+
+Simply scan, export and fly.
 
 ### Important
 
 For best results, select a dedicated traffic model package such as FSLTL, AIG or another AI traffic library.
 
-Scanning the entire Community folder is supported but may increase scan times and produce less useful results.
+Scanning the entire Community folder is possible but may increase scan times and produce less useful results.
 
 ---
 
-## Version 0.2 Beta
+## Automatic MSFS Discovery
+
+TrafficMatch Builder can automatically search for:
+
+* Microsoft Flight Simulator Community folders
+* Compatible traffic libraries
+* Fenix aircraft packages
+* PMDG aircraft packages
+* Supported addon liveries
+
+The application attempts to automatically resolve compatible aircraft models whenever possible.
+
+---
+
+## Community Folder Workflow
+
+TrafficMatch Builder uses a guided Community Folder workflow.
+
+The Community folder is selected before choosing the actual scan source.
+
+This allows the application to automatically discover:
+
+* Fenix aircraft packages
+* PMDG aircraft packages
+* Related addon liveries
+* Additional traffic model packages
+
+This improves model detection and helps generate more reliable VMR rules.
+
+---
+
+## Version 0.6 Beta
 
 ### Highlights
 
-* Improved About window
-* Clickable GitHub project link
-* Clickable Flightsim.to project link
-* Community folder scan warning
-* Hidden Easter Egg
-* Improved localization support
-* Updated documentation
-* Additional UI improvements
-* Improved stability and usability
-* 0/68 VirusTotal detections at release time
+* Visual overhaul and UI polish
+* Improved overall application layout
+* Improved Help window readability
+* Improved Credits window layout
+* Improved Supported Packs window
+* Improved scan report readability
+* Improved Community Folder workflow
+* Improved application branding
+* Improved application icon handling
+* Improved localization and translation consistency
+* Improved warning messages and user guidance
+* Improved window sizing and scaling
+* Fixed multiple UI layout issues
+* Fixed text selection issue in the Help window
+* Fixed various translation inconsistencies
+* Fixed several visual bugs
+* Fixed multiple stability issues
+* General code cleanup and optimization
+* Additional bug fixes and performance improvements
 
 ---
 
@@ -138,79 +237,19 @@ TrafficMatch Builder is fully portable.
 
 Simply download, extract and launch the application.
 
----
+### Important
 
-## Security & Privacy
+Version 0.6 Beta includes an **Assets** folder containing application branding resources.
 
-TrafficMatch Builder operates entirely offline.
+Do not remove the **Assets** folder from the release package.
 
-The application:
+The executable and Assets folder should remain together.
 
-* Does not collect personal information
-* Does not collect telemetry
-* Does not upload files
-* Does not download files
-* Does not modify simulator files
-* Does not modify traffic model files
-* Does not connect to external servers
-* Does not connect to the VATSIM network
+Expected release structure:
 
-TrafficMatch Builder only reads aircraft configuration files selected by the user and generates VMR files based on the information found.
-
----
-
-## Disclaimer
-
-TrafficMatch Builder is designed to work with traffic packages for Microsoft Flight Simulator by indexing installed aircraft models and generating configuration files.
-
-Users are solely responsible for ensuring that their use of third-party content complies with the respective terms of use.
-
-The developer does not endorse or encourage any use that violates third-party conditions.
-
----
-
-## FlightSim.To
-
-https://flightsim.to/addon/109917/trafficmatch-builder-msfs-traffic-library-vmr-generator
-
----
-
-## GitHub Releases
-
-Download the latest version from the Releases section of this repository.
-
----
-
-## Beta Notice
-
-TrafficMatch Builder is currently an early beta release.
-
-While extensive testing has been performed, minor bugs, compatibility issues or unexpected behavior may still occur.
-
-Feedback, bug reports and feature suggestions are always welcome and help improve future versions.
-
----
-
-## Legal Notice
-
-TrafficMatch Builder is an independent community project.
-
-This software is not affiliated with, endorsed by or sponsored by VATSIM, vPilot, Microsoft, Asobo Studio, FSLTL, AIG or any other third-party organization.
-
-All trademarks and product names are the property of their respective owners.
-
----
-
-## License
-
-Copyright © 2026 Nils
-
-TrafficMatch Builder is provided free of charge.
-
-Redistribution of the original, unmodified release package is permitted.
-
-Modification, repackaging, redistribution under a different name or claiming the project as your own work is not permitted without prior permission from the author.
-
----
-
-**Built by simmers, for simmers.**
+```text
+TrafficMatchBuilder.exe
+Assets/
+  banner.png
+  logo.png
+  icon.ico
